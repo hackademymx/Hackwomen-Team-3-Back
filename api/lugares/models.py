@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class lugares(models.Model):
+class lugar(models.Model):
 
     name = models.CharField(max_length=56)
     description = models.CharField(max_length=256)

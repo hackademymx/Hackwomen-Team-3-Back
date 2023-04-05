@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import lugares
+from .models import lugar
 
 
-class lugaresSerializer(serializers.ModelSerializer): 
+class lugarSerializer(serializers.ModelSerializer): 
 
     class Meta:
-        model = lugares
+        model = lugar
         fields = '_all_'
         
