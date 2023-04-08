@@ -57,8 +57,8 @@ INSTALLED_APPS += [
     'corsheaders',
 
     # Local apps:
-    'initial',
-    'lugares',
+    'initial',  
+    'places',  
 ]
 
 MIDDLEWARE = [
