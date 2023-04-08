@@ -25,7 +25,7 @@ class PlaceAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 
-class PlaceAPIUpdateDeleteView(APIView)
+class PlaceAPIUpdateDeleteView(APIView):
     
     def patch(self, request, id):
         place = Place.objects.filter(id=id).first()
