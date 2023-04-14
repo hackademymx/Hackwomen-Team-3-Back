@@ -102,6 +102,7 @@ DB_USER = config('DB_USER', default='')
 DB_PASSWD = config('DB_PASSWD', default='')
 DB_HOST = config('DB_HOST', default='127.0.0.1')
 DB_PORT = config('DB_PORT', cast=int, default=5432)
+DATABASE_URL = config('DATABASE_URL', default='')
 
 if DB_NAME != "":
     DATABASES = {
