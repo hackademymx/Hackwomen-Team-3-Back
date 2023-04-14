@@ -44,6 +44,8 @@ La finalidad es que sirva de guía y permita al desarrollador enfocarse en escri
 
 ⌨️ con ❤️ por Gabriella Martínez 😊
 
+#Starting service with 'gunicorn --pythonpath api core.wsgi:application'
+
 
 **Referencias:**
 
