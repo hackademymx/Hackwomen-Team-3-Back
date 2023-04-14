@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 import sys
+import dj_database_url
 from pathlib import Path
 from decouple import config, Csv
 ENV =config('ENV', default= 'dev')
@@ -97,12 +98,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DB_NAME = config('DB_NAME', default='')
+'''DB_NAME = config('DB_NAME', default='')
 DB_USER = config('DB_USER', default='')
 DB_PASSWD = config('DB_PASSWD', default='')
 DB_HOST = config('DB_HOST', default='127.0.0.1')
-DB_PORT = config('DB_PORT', cast=int, default=5432)
-DATABASE_URL = config('DATABASE_URL', default='')
+DB_PORT = config('DB_PORT', cast=int, default=5432)'''
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+
+}
 
 if DB_NAME != "":
     DATABASES = {
