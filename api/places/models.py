@@ -10,11 +10,13 @@ class Place(models.Model):
 
     name = models.CharField(max_length=56)
     description = models.CharField(max_length=256)
+    address_country = models.CharField(max_length=32)
     address_state =models.CharField(max_length=32)
     address_city= models.CharField(max_length=32)
     address_colonia =models.CharField(max_length=32)
     address_street= models.CharField(max_length=32)
     address_zipcode= models.CharField(max_length=32)
+
     #image = models.ImageField(upload_to=upload_load, default='default.jpg', null=False)
 
     class Meta:

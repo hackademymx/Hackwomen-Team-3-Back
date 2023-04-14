@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=56)),
                 ('description', models.CharField(max_length=256)),
+                ('address_country', models.CharField(max_length=32)),
                 ('address_state', models.CharField(max_length=32)),
                 ('adress_city', models.CharField(max_length=32)),
                 ('address_colonia', models.CharField(max_length=32)),
