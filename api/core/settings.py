@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 import sys
-import dj_database_url
+#simport dj_database_url
 from pathlib import Path
 from decouple import config, Csv
 ENV =config('ENV', default= 'dev')
@@ -98,12 +98,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-'''DB_NAME = config('DB_NAME', default='')
+DB_NAME = config('DB_NAME', default='')
 DB_USER = config('DB_USER', default='')
 DB_PASSWD = config('DB_PASSWD', default='')
 DB_HOST = config('DB_HOST', default='127.0.0.1')
-DB_PORT = config('DB_PORT', cast=int, default=5432)'''
-DATABASES = {
+DB_PORT = config('DB_PORT', cast=int, default=5432)
+
+'''DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 
 }
@@ -127,7 +128,7 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         },
     }'
-'''
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
