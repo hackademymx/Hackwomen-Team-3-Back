@@ -19,6 +19,12 @@ class PlaceAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request): 
+        '''print(request.data) #request.data se convirtió en un diccionario
+        try: 
+            file = request.data['image']
+        except KeyError:
+            file = None'''
+        request.data['image']= file
         serializer = PlaceSerializer(data=request.data) 
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -26,6 +32,8 @@ class PlaceAPIView(APIView):
     
 
 class PlaceAPIUpdateDeleteView(APIView):
+
+    parser_classes = (MultiPartParser, FormParser)
     
     
     def get(self, request, id):
