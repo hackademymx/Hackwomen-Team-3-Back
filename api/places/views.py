@@ -19,12 +19,12 @@ class PlaceAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request): 
-        '''print(request.data) #request.data se convirtió en un diccionario
+        print(request.data) #request.data se convirtió en un diccionario
         try: 
             file = request.data['image']
+            request.data['image'] = file
         except KeyError:
-            file = None'''
-        request.data['image']= file
+            file = None
         serializer = PlaceSerializer(data=request.data) 
         serializer.is_valid(raise_exception=True)
         serializer.save()

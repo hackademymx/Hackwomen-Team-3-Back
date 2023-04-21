@@ -17,8 +17,6 @@ class Place(models.Model):
     address_zipcode= models.CharField(max_length=32)
     image = models.ImageField(upload_to=upload_load, default='default.jpg', null=False) #ruta, el default es una imagen que se agregará más adelante 
 
-    #image = models.ImageField(upload_to=upload_load, default='default.jpg', null=False)
-
     class Meta:
         db_table= 'places'
     
