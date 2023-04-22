@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LugaresConfig(AppConfig):
+class CommentsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'lugares'
+    name = 'comments'

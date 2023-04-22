@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 import sys
+#import dj_database_url
 from pathlib import Path
 from decouple import config, Csv
-
+ENV =config('ENV', default= 'dev')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,8 +58,9 @@ INSTALLED_APPS += [
     'corsheaders',
 
     # Local apps:
-    'initial',
-    'lugares',
+    'initial',  
+    'places',  
+    'comments',
 ]
 
 MIDDLEWARE = [
@@ -96,11 +98,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DB_NAME = config('POSTGRES_DB', default='')
-DB_USER = config('POSTGRES_USER', default='')
-DB_PASSWD = config('POSTGRES_PASSWORD', default='')
-DB_HOST = config('POSTGRES_HOST', default='127.0.0.1')
-DB_PORT = config('POSTGRES_PORT', cast=int, default=5432)
+DB_NAME = config('DB_NAME', default='')
+DB_USER = config('DB_USER', default='')
+DB_PASSWD = config('DB_PASSWD', default='')
+DB_HOST = config('DB_HOST', default='127.0.0.1')
+DB_PORT = config('DB_PORT', cast=int, default=5433)
+'''DATABASES = {
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+
+} '''
 
 if DB_NAME != "":
     DATABASES = {
@@ -108,7 +114,7 @@ if DB_NAME != "":
             "ENGINE": "django.db.backends.postgresql",
             "NAME": DB_NAME,
             "USER": DB_USER,
-            "PASSWORD": DB_PASSWORD,
+            "PASSWORD": DB_PASSWD,
             "HOST": DB_HOST,
             "PORT": DB_PORT,
         },
@@ -120,6 +126,7 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         },
     }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -169,3 +176,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     )
 }
+
+#Media 
+MEDIA_URL = '/media/' #es un directorio 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #indicar donde esta la carpeta media
