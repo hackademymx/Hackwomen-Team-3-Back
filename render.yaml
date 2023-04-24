@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: safe_places
+    env: docker
+    autoDeploy: False
+    plan: free
+    region: oregon
+    envVars:
+      - key: ENV
+        sync: False
+      #      - key: DJANGO_SECRET_KEY
+      #        sync: False
+      - key: DJANGO_ALLOWED_HOSTS
+        sync: False      
+      - key: CORS_ALLOW_ALL_ORIGINS
+        sync: False     
+      - key: CORS_ALLOWED_ORIGINS
+        sync: False     
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: False     
+      - key: CSRF_COOKIE-SECURE
+        sync: False     
+      - key: DEBUG
+        sync: False     
+      - key: DB_NAME
+        sync: False     
+      - key: DB_USER
+        sync: False     
+      - key: DB_PASSWD
+        sync: False     
+      - key: DB_HOST
+        sync: False     
+      - key: DB_PORT
+        sync: False     
