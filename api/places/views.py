@@ -13,9 +13,9 @@ class PlaceAPIView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     def get(self, request): 
-    
+
         places = Place.objects.all()
-        serializer = PlaceSerializer(places, many = True)
+        serializer = PlaceListCommentSerializer(places)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request): 
@@ -40,7 +40,7 @@ class PlaceAPIUpdateDeleteView(APIView):
         place = Place.objects.filter(id=id).first()
         if place is None:
             return Response({'error':'Bad request.'}, status=status.HTTP_400_BAD_REQUEST)
-        serializer = PlaceListCommentSerializer(place)
+        serializer = PlaceSerializer(place)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def patch(self, request, id):
@@ -50,7 +50,7 @@ class PlaceAPIUpdateDeleteView(APIView):
         serializer = PlaceSerializer(place, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_0K)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     def delete(self, request, id):
         place = Place.objects.filter(id=id).first()

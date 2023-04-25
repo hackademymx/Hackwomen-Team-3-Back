@@ -177,6 +177,8 @@ REST_FRAMEWORK = {
     )
 }
 
+
+
 #Media 
 MEDIA_URL = '/media/' #es un directorio 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #indicar donde esta la carpeta media
