@@ -18,7 +18,7 @@ services:
         sync: False     
       - key: CSRF_TRUSTED_ORIGINS
         sync: False     
-      - key: CSRF_COOKIE-SECURE
+      - key: CSRF_COOKIE_SECURE
         sync: False     
       - key: DEBUG
         sync: False     
