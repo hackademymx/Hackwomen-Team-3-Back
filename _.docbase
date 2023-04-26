@@ -1,0 +1,181 @@
+render.yaml
+
+
+services:
+  - type: web
+    name: safe_places
+    env: docker
+    autoDeploy: False
+    plan: free
+    region: oregon
+    envVars:
+      - key: ENV
+        sync: False
+      #      - key: DJANGO_SECRET_KEY
+      #        sync: False
+      - key: DJANGO_ALLOWED_HOSTS
+        sync: False      
+      - key: CORS_ALLOW_ALL_ORIGINS
+        sync: False     
+      - key: CORS_ALLOWED_ORIGINS
+        sync: False     
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: False     
+      - key: CSRF_COOKIE-SECURE
+        sync: False     
+      - key: DEBUG
+        sync: False     
+      - key: DB_NAME
+        sync: False     
+      - key: DB_USER
+        sync: False     
+      - key: DB_PASSWD
+        sync: False     
+      - key: DB_HOST
+        sync: False     
+      - key: DB_PORT
+        sync: False    
+
+
+
+
+
+
+entrypoint.sh
+
+
+
+#!/bin/bash
+
+cd /app/api
+
+python manage.py migrate
+
+exec "$@"
+
+
+
+
+
+
+Dockerfile
+
+
+
+# For more information, please refer to https://aka.ms/vscode-docker-pyhton
+FROM python:3.11.2-bullseye
+
+EXPOSE 8000
+
+# Keeps Pyhton from generating .pyc file in the container
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Turns off buffering for easier container logging
+ENV PYTHONUMBUFFERED=1
+
+# Intall pip requirements
+COPY requirements.txt .
+RUN python -m pip install -r requirements.txt
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# Required in Windows and MAC OS to run the entrypoint.sh script
+RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh \
+    && chmod 744 /usr/local/bin/entrypoint.sh
+
+WORKDIR /app
+COPY . /app
+
+# Creates a non-root user with an explicit UID and adds permission to access the /app folder
+# For more info, please refer to https://aka.ms/vscode-docker-pyhton-configure-containers
+RUN adduser -u 5678 --diabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
+
+# During debugging, this entry point will be overridden. For mor information, please refer to https://aka.ms/vscode-docker-pyhton-debugging
+# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "core.wsgi"]
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+CMD ["gunicorn", "core.wsgi"]
+
+
+
+
+
+
+
+
+
+docker-compose.yml
+
+
+
+version: '3.4'
+
+services:
+  Hackwomen-Team-3-Back:
+    image: Hackwomen-Team-3-Back
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8000:8000
+
+
+
+
+
+
+
+docker-compose.debug.yml
+
+
+
+version: '3.4'
+
+services:
+  Hackwomen-Team-3-Back:
+    image: Hackwomen-Team-3-Back
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --Listen 0.0.0.0:5678 api/manage.py runserver 0.0.0.0:8000 --nothreading --noreload"]
+    ports:
+      - 8000:8000  
+      - 5678:5678
+
+
+
+
+
+
+
+.dockerignore
+
+
+
+**/__pycache__
+**/.venv
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/bin
+**/charts
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/node_modules
+**/npm-debug.log
+**/obj
+**/secrets.dev.yaml
+**/values.dev.yaml
+LICENSE
+README.md
