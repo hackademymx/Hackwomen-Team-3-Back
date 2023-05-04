@@ -6,12 +6,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = (
-            'id',
-            'place',
-            'comment',
-            'created',
-        )
+        fields = ('id','place','comment','created',)
 
     def to_representation(self, instance):
         return {
