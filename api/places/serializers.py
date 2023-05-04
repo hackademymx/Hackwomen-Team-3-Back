@@ -17,7 +17,7 @@ class PlaceListCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Place
-        fields = ('id','name','comment',)       
+        fields = '__all__'       
 
     def get_comment(self, obj):
         selected_comment = Comment.objects.filter(place_id = obj.id)
