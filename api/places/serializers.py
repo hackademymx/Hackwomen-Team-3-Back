@@ -17,7 +17,7 @@ class GetPlaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Place
         fields = [
-            'id', 'name', 'description', 'address_state', 'address_city', 
+            'id', 'name', 'description', 'address_state', 'address_city', 'image', 
         ]
 
         '''fields = [
