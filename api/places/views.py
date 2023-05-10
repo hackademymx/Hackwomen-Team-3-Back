@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 from .models import Place
-from .serializers import PlaceSerializer, PlaceListCommentSerializer
+from .serializers import PlaceSerializer, GetPlaceSerializer
 
 # Create your views here.
 
@@ -15,7 +15,7 @@ class PlaceAPIView(APIView):
     def get(self, request): 
     
         places = Place.objects.all()
-        serializer = PlaceListCommentSerializer(places)
+        serializer = GetPlaceSerializer(places, many = True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request): 
