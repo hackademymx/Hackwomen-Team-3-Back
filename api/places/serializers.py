@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Place
 from comments.models import Comment
-from comments.serializers import CommentPlaceListSerializer
+'''from comments.serializers import CommentPlaceListSerializer'''
 
 
 
@@ -20,7 +20,7 @@ class GetPlaceSerializer(serializers.ModelSerializer):
             'id', 'name',
         ]
 
-class PlaceListCommentSerializer(serializers.ModelSerializer): 
+'''class PlaceListCommentSerializer(serializers.ModelSerializer): 
 
     class Meta:
         model = Place
@@ -28,5 +28,5 @@ class PlaceListCommentSerializer(serializers.ModelSerializer):
 
     def get_comment(self, obj):
         selected_comment = Comment.objects.filter(place_id = obj.id)
-        return CommentPlaceListSerializer(selected_comment, many=True).data
+        return CommentPlaceListSerializer(selected_comment, many=True).data'''
         
