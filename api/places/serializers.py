@@ -11,13 +11,20 @@ class PlaceSerializer(serializers.ModelSerializer):
 
         model = Place
         fields = '__all__'
-
+#Este serializador muestra todos los lugares
+class GetPlaceSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Place
+        fields = [
+            'id', 'name',
+        ]
 
 class PlaceListCommentSerializer(serializers.ModelSerializer): 
 
     class Meta:
         model = Place
-        fields = ('id','name','comment',)       
+        fields = '__all__'   
 
     def get_comment(self, obj):
         selected_comment = Comment.objects.filter(place_id = obj.id)
